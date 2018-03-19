@@ -1,5 +1,6 @@
 package engine.core;
 
+import static engine.filesystem.Commands.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import org.lwjgl.opengl.GL;
@@ -7,6 +8,7 @@ import org.lwjgl.opengl.GL;
 public class Window {
 
     public Window() {
+
         if(glfwInit() != true) {
             System.err.println("GLFW failed to initialize!");
             System.exit(1);
@@ -14,28 +16,32 @@ public class Window {
 
         long win = glfwCreateWindow(640, 480, "Djent", 0, 0); //Width, Height, Title, Fullscreen, Monitor for window
         glfwShowWindow(win);
-
         glfwMakeContextCurrent(win);
-
         GL.createCapabilities();
+        Renderer renderer = new Renderer();
 
         while (glfwWindowShouldClose(win) != true) {
-            glfwPollEvents();
+                //ALL INPUT CODE GOES HERE
+                if(glfwGetKey(win, GLFW_KEY_P)==1) {
+                    getInput();
+                }
 
-            glClear(GL_COLOR_BUFFER_BIT);
+                glfwPollEvents();
 
-            //This code is deprecated, must be changed later. it is being used now just for testing purposes.
-            glBegin(GL_QUADS);
+                glClear(GL_COLOR_BUFFER_BIT);
 
-            glVertex2f(-0.5f, 0.5f);
-            glVertex2f(0.5f, 0.5f);
-            glVertex2f(0.5f, -0.5f);
-            glVertex2f(-0.5f, -0.5f);
-            glEnd();
+                //This code is deprecated, must be changed later. it is being used now just for testing purposes.
+                glBegin(GL_QUADS);
 
-            glfwSwapBuffers(win);
+                renderer.getRenderInfo();
+
+                glEnd();
+
+                glfwSwapBuffers(win);
         }
 
-        glfwTerminate();
+        if(glfwWindowShouldClose(win) == true) {
+            glfwTerminate();
+        }
     }
 }
