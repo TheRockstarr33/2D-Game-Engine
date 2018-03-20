@@ -18,7 +18,6 @@ public class Window {
         glfwShowWindow(win);
         glfwMakeContextCurrent(win);
         GL.createCapabilities();
-        Renderer renderer = new Renderer();
 
         while (glfwWindowShouldClose(win) != true) {
                 //ALL INPUT CODE GOES HERE
@@ -33,7 +32,7 @@ public class Window {
                 //This code is deprecated, must be changed later. it is being used now just for testing purposes.
                 glBegin(GL_QUADS);
 
-                renderer.getRenderInfo();
+                Renderer.getRenderInfo();
 
                 glEnd();
 

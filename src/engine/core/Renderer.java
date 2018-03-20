@@ -6,14 +6,15 @@ import static org.lwjgl.opengl.GL11.glVertex2f;
 
 public class Renderer {
 
-    public Renderer() {
-        //new Map();
+    public static void getRenderInfo() {
+        glVertex2f(-0.5f, 0.5f);
+        glVertex2f(0.5f, 0.5f);
+        glVertex2f(0.5f, -0.5f);
+        glVertex2f(-0.5f, -0.5f);
     }
 
-    public void getRenderInfo() {
-//        glVertex2f(-0.5f, 0.5f);
-//        glVertex2f(0.5f, 0.5f);
-//        glVertex2f(0.5f, -0.5f);
-//        glVertex2f(-0.5f, -0.5f);
+    public void newQuad(int sizeX, int sizeY, int posX, int posY) {
+
+
     }
 }
