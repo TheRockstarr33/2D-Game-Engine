@@ -1,0 +1,2 @@
+http://wiki.lwjgl.org/wiki/The_Quad_textured.html
+http://ninjacave.com/lwjglbasics3
