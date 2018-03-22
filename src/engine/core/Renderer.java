@@ -1,7 +1,9 @@
 package engine.core;
 
 import engine.filesystem.Map;
+import engine.objects.Box;
 
+import static engine.filesystem.Map.*;
 import static org.lwjgl.opengl.GL11.glVertex2f;
 
 public class Renderer {
@@ -46,5 +48,6 @@ public class Renderer {
     public static void getRenderInfo() {
         //THIS IS JUST FOR TESTING. Needs to be modified to send info from objects.
         renderQuad(1, 1, 0.5f, 0.5f);
+        Map.drawBoxes();
     }
 }

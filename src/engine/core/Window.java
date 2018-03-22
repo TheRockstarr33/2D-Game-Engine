@@ -20,6 +20,9 @@ public class Window {
         GL.createCapabilities();
 
         while (glfwWindowShouldClose(win) != true) {
+
+            glfwPollEvents();
+
                 //ALL INPUT CODE GOES HERE
                 if(glfwGetKey(win, GLFW_KEY_P)==1) {
                     getInput();

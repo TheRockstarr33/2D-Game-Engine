@@ -48,8 +48,8 @@ public class LoadFile {
             while(inFile.hasNextLine()) {
                 String q = inFile.nextLine();
                 if(q.startsWith("box")) {
-                    Box a = new Box(Integer.parseInt(inFile.nextLine()),
-                            Integer.parseInt(inFile.nextLine()));
+                    Box a = new Box(Float.parseFloat(inFile.nextLine()),
+                            Float.parseFloat(inFile.nextLine()));
                     output.add(a);
                 }
             }
