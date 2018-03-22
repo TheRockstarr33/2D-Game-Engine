@@ -2,6 +2,8 @@ package engine.filesystem;
 
 import engine.objects.Box;
 
+import java.util.ArrayList;
+
 import static engine.filesystem.LoadFile.loadBoxesFromMapFile;
 import static engine.filesystem.LoadFile.loadMapFile;
 
@@ -11,7 +13,7 @@ import static engine.filesystem.LoadFile.loadMapFile;
 public class Map {
 
     private static int[] spawnPoint = new int[2];
-    private static Box[] boxes;
+    private static ArrayList boxes;
 
     public static void loadMap(String path) {
         System.out.println("Got map: " + path);
@@ -25,9 +27,5 @@ public class Map {
 
     public static int[] getSpawnPoint() {
         return spawnPoint;
-    }
-
-    public static Box[] getBoxes() {
-        return boxes;
     }
 }

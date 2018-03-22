@@ -2,6 +2,8 @@ package engine.filesystem;
 
 import engine.objects.Box;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.io.*;
 
@@ -26,9 +28,8 @@ public class LoadFile {
         }
     }
 
-    public static Box[] loadBoxesFromMapFile(String filePath) {
-        Box[] output = new Box[0];
-        int boxNum = -1;
+    public static ArrayList loadBoxesFromMapFile(String filePath) {
+        ArrayList output = new ArrayList();
         try {
             Scanner inFile = new Scanner(new FileInputStream(filePath));
 
@@ -37,7 +38,7 @@ public class LoadFile {
                 if(q.startsWith("box")) {
                     Box a = new Box(Integer.parseInt(inFile.nextLine()),
                             Integer.parseInt(inFile.nextLine()));
-                    output[boxNum++] = a;
+                    output.add(a);
                 }
             }
             inFile.close();
