@@ -15,6 +15,11 @@ public class Map {
     private static int[] spawnPoint = new int[2];
     private static ArrayList boxes;
 
+    /**
+     * Runs all the functions for a map to be loaded.
+     *
+     * @param path
+     */
     public static void loadMap(String path) {
         System.out.println("Got map: " + path);
         loadMapFile(path);

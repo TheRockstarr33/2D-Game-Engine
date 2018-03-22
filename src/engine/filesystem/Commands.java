@@ -8,6 +8,13 @@ public class Commands {
 
     static Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Gets command input. Should only be run when something is not being done
+     * simultaneously, as it pauses and can crash the program. Always finishes upon
+     * completion of a single command.
+     *
+     * @return
+     */
     public static int getInput() {
         int x = 0;
         if(scanner.hasNextLine()==true) {

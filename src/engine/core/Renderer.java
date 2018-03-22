@@ -40,7 +40,11 @@ public class Renderer {
         glVertex2f(d[0], d[1]);
     }
 
+    /**
+     * Sends all rendering info to the window.
+     */
     public static void getRenderInfo() {
+        //THIS IS JUST FOR TESTING. Needs to be modified to send info from objects.
         renderQuad(1, 1, 0.5f, 0.5f);
     }
 }

@@ -9,6 +9,12 @@ import java.io.*;
 
 public class LoadFile {
 
+    /**
+     * Loads basic and general map data from a file. Only known constants are loaded
+     * here, everything else has to be loaded on an individual basis.
+     *
+     * @param filePath
+     */
     public static void loadMapFile(String filePath) {
         try {
             Scanner inFile = new Scanner(new FileInputStream(filePath));
@@ -28,6 +34,12 @@ public class LoadFile {
         }
     }
 
+    /**
+     * Loads any boxes from a map file and returns an ArrayList of Box objects.
+     *
+     * @param filePath
+     * @return
+     */
     public static ArrayList loadBoxesFromMapFile(String filePath) {
         ArrayList output = new ArrayList();
         try {
