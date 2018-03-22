@@ -19,13 +19,31 @@ public class LoadFile {
                     sp[1] = Integer.parseInt(inFile.nextLine());
                     Map.setSpawnPoint(sp);
                 }
+            }
+            inFile.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Box[] loadBoxesFromMapFile(String filePath) {
+        Box[] output = new Box[0];
+        int boxNum = -1;
+        try {
+            Scanner inFile = new Scanner(new FileInputStream(filePath));
+
+            while(inFile.hasNextLine()) {
+                String q = inFile.nextLine();
                 if(q.startsWith("box")) {
-                    new Box(Integer.parseInt(inFile.nextLine()), Integer.parseInt(inFile.nextLine()));
+                    Box a = new Box(Integer.parseInt(inFile.nextLine()),
+                            Integer.parseInt(inFile.nextLine()));
+                    output[boxNum++] = a;
                 }
             }
             inFile.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        return output;
     }
 }
