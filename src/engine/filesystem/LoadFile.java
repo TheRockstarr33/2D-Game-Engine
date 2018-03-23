@@ -3,7 +3,6 @@ package engine.filesystem;
 import engine.objects.Box;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.io.*;
 
@@ -30,7 +29,7 @@ public class LoadFile {
             }
             inFile.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Map not found.");
         }
     }
 

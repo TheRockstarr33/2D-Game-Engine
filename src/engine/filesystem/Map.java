@@ -2,7 +2,6 @@ package engine.filesystem;
 
 import engine.objects.Box;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static engine.core.Renderer.renderQuad;
@@ -35,10 +34,6 @@ public class Map {
     public static int[] getSpawnPoint() {
         return spawnPoint;
     }
-
-//    public static int getBoxNumber() {
-//        return boxes.size();
-//    }
 
     /**
      * Draws the boxes in the map

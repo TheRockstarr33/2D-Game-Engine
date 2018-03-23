@@ -47,7 +47,6 @@ public class Renderer {
      */
     public static void getRenderInfo() {
         //THIS IS JUST FOR TESTING. Needs to be modified to send info from objects.
-        renderQuad(1, 1, 0.5f, 0.5f);
         Map.drawBoxes();
     }
 }
