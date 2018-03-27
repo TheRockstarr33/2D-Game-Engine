@@ -1,5 +1,6 @@
-package engine.filesystem;
+package engine.filesystem.loadfiles;
 
+import engine.filesystem.Map;
 import engine.objects.Box;
 
 import java.util.ArrayList;

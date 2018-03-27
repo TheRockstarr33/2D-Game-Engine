@@ -5,8 +5,8 @@ import engine.objects.Box;
 import java.util.ArrayList;
 
 import static engine.core.Renderer.renderQuad;
-import static engine.filesystem.LoadFile.loadBoxesFromMapFile;
-import static engine.filesystem.LoadFile.loadMapFile;
+import static engine.filesystem.loadfiles.LoadFile.loadBoxesFromMapFile;
+import static engine.filesystem.loadfiles.LoadFile.loadMapFile;
 
 /**
  * This class holds all of the data for the loaded map in variables, and has access to them all.
