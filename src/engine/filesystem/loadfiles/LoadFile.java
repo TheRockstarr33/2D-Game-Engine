@@ -49,7 +49,8 @@ public class LoadFile {
                 String q = inFile.nextLine();
                 if(q.startsWith("box")) {
                     Box a = new Box(Float.parseFloat(inFile.nextLine()),
-                            Float.parseFloat(inFile.nextLine()));
+                            Float.parseFloat(inFile.nextLine()),
+                            Integer.parseInt(inFile.nextLine()));
                     output.add(a);
                 }
             }

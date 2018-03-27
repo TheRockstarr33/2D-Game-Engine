@@ -43,10 +43,10 @@ public class Map {
             for (int a = boxes.size(); a > 0; a--) {
                 Box b = boxes.get(a-1);
                 float[] i = b.getCoordinates();
-                renderQuad(0.2f, 0.2f, i[0], i[1]);
+                renderQuad(0.2f, 0.2f, i[0], i[1], b.getTexturePath());
             }
         } catch (Exception e) {
-            renderQuad(1, 1, 1, 1);
+            renderQuad(1, 1, 1, 1, null);
         }
     }
 }

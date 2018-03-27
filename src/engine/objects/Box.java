@@ -5,12 +5,14 @@ public class Box {
     public static int numOfBoxes;
     float x;
     float y;
+    int tex;
 
-    public Box(float x, float y) {
+    public Box(float x, float y, int tex) {
         this.x=x;
         this.y=y;
+        this.tex=tex;
         //We can add more variables here if we need to, like size or how it looks
-        numOfBoxes++;
+        numOfBoxes++; //Necessary???
     }
 
     /**
@@ -24,5 +26,12 @@ public class Box {
         a[0] = this.x;
         a[1] = this.y;
         return a;
+    }
+
+    public String getTexturePath() {
+        if(tex==0) {
+            return "textures/qBlock.png";
+        }
+        return null;
     }
 }
