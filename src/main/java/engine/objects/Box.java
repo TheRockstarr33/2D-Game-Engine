@@ -1,5 +1,7 @@
 package engine.objects;
 
+import org.lwjgl.stb.*;
+
 public class Box {
 
     public static int numOfBoxes;
@@ -34,4 +36,6 @@ public class Box {
         }
         return null;
     }
+
+//    public char
 }

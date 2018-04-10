@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL30;
 import javax.xml.soap.Text;
 import java.io.IOException;
 import java.nio.FloatBuffer;
+import org.lwjgl.stb.*;
 
 import static org.lwjgl.opengl.GL11.glTexCoord1d;
 import static org.lwjgl.opengl.GL11.glTexCoord2f;
