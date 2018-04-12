@@ -43,6 +43,12 @@ public class Window {
         glfwMakeContextCurrent(win);
         GL.createCapabilities();
 
+        try {
+            Renderer.initRenderer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         while (glfwWindowShouldClose(win) != true) {
 
             glfwPollEvents();
@@ -57,7 +63,7 @@ public class Window {
                 glClear(GL_COLOR_BUFFER_BIT);
 
                 //This code is deprecated, must be changed later. it is being used now just for testing purposes.
-                glBegin(GL_QUADS);
+//                glBegin(GL_QUADS);
 
                 Renderer.getRenderInfo();
 

@@ -1,87 +1,61 @@
 package engine.core;
 
 import engine.filesystem.Map;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL15;
-import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
+import engine.filesystem.loadfiles.LoadFile;
 
-import javax.xml.soap.Text;
-import java.io.IOException;
-import java.nio.FloatBuffer;
-
-import static org.lwjgl.opengl.GL11.glTexCoord1d;
-import static org.lwjgl.opengl.GL11.glTexCoord2f;
-import static org.lwjgl.opengl.GL11.glVertex2f;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
+import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
+import static org.lwjgl.opengl.GL30.glBindVertexArray;
 
 public class Renderer {
 
     private static int vaoId = 0;
     private static int vboId = 0;
+    static ShaderProgram shaderProgram;
 
-    public static void setupQuad() {
-        float[] vertices = {
-                -0.5f, 0.5f, 0f,
-                -0.5f, -0.5f, 0f,
-                0.5f, -0.5f, 0f,
-                0.5f, -0.5f, 0f,
-                0.5f, 0.5f, 0f,
-                -0.5f, 0.5f, 0f
-        };
-
-        FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(vertices.length);
-        verticesBuffer.put(vertices);
-        verticesBuffer.flip();
-
-        //Create VAO in memory
-        vaoId = GL30.glGenVertexArrays();
-        GL30.glBindVertexArray(vaoId);
-
-        vboId = GL15.glGenBuffers();
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboId);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesBuffer, GL15.GL_STATIC_DRAW);
-
-        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
-
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
-
-        GL30.glBindVertexArray(0);
-    }
-
-
-    //Not working, for use with slick-util
-//    public static Texture loadTexture(String path) {
-//        Texture texture;
-//        try {
-//            //Add if statement for different filetypes in the future
-//            texture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("textures/qBlock.png"));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.out.println("Error loading texture");
-//            texture = null;
-//        }
-//        return texture;
+//    public static void setupQuad() {
+//        float[] vertices = {
+//                -0.5f, 0.5f, 0f,
+//                -0.5f, -0.5f, 0f,
+//                0.5f, -0.5f, 0f,
+//                0.5f, -0.5f, 0f,
+//                0.5f, 0.5f, 0f,
+//                -0.5f, 0.5f, 0f
+//        };
+//
+//        FloatBuffer verticesBuffer = BufferUtils.createFloatBuffer(vertices.length);
+//        verticesBuffer.put(vertices);
+//        verticesBuffer.flip();
+//
+//        //Create VAO in memory
+//        vaoId = GL30.glGenVertexArrays();
+//        GL30.glBindVertexArray(vaoId);
+//
+//        vboId = GL15.glGenBuffers();
+//        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboId);
+//        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, verticesBuffer, GL15.GL_STATIC_DRAW);
+//
+//        GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+//
+//        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+//
+//        GL30.glBindVertexArray(0);
 //    }
 
     /**
-     * Renders one untextured quad.
-     *
-     * Parameters are for the size of the quad and the position, starting from the
-     * upper left corner.
+     * Returns a float array with the information about each vertex in a given quad.
      *
      * @param sizeX
      * @param sizeY
      * @param posX
      * @param posY
+     * @return
      */
-    public static void renderQuad(float sizeX, float sizeY, float posX, float posY, String texPath) {
+    public static float[] getQuadVertexArray(float sizeX, float sizeY, float posX,
+                                             float posY) {
         //These float arrays each represent one vertex of the quad. The first index
         //represents the X axis, and the second represents the Y axis.
-
-
-//        loadTexture(texPath).bind();
-
         float[] a = new float[2];
         float[] b = new float[2];
         float[] c = new float[2];
@@ -96,24 +70,72 @@ public class Renderer {
         d[0] = posX + sizeX;
         d[1] = posY - sizeY;
 
-        glTexCoord2f(0, 0);
-        glVertex2f(a[0], a[1]);
-        glTexCoord2f(1, 0);
-        glVertex2f(b[0], b[1]);
-        glTexCoord2f(1, 1);
-        glVertex2f(c[0], c[1]);
-        glTexCoord2f(0, 1);
-        glVertex2f(d[0], d[1]);
+        float[] vertices = new float[]{
+                a[0], a[1],
+                b[0], b[1],
+                c[0], c[1],
+                d[0], d[1]
+        };
 
-//        setupQuad();
+        return vertices;
+    }
+
+    public static void initRenderer() throws Exception {
+        shaderProgram = new ShaderProgram();
+        shaderProgram.createVertexShader(LoadFile.loadFile("/vertex.vs"));
+        shaderProgram.createFragmentShader(LoadFile.loadFile("/fragment.fs"));
+        shaderProgram.link();
+    }
+
+//    public static void initQuad(float[] vertexArray) {
+//        FloatBuffer verticesBuffer = MemoryUtil.memAllocFloat(vertexArray.length);
+//        verticesBuffer.put(vertexArray).flip();
 //
-//        GL30.glBindVertexArray(vaoId);
-//        GL20.glEnableVertexAttribArray(0);
+//        vaoId = glGenVertexArrays(); //Is the right import being used here?
+//        glBindVertexArray(vaoId);
 //
-//        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 6);
+//        vboId = glGenBuffers();
+//        glBindBuffer(GL_ARRAY_BUFFER, vboId);
+//        glBufferData(GL_ARRAY_BUFFER, verticesBuffer, GL_STATIC_DRAW);
+//        memFree(verticesBuffer);
 //
-//        GL20.glDisableVertexAttribArray(0);
-//        GL30.glBindVertexArray(0);
+//        glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0);
+//
+//        glBindBuffer(GL_ARRAY_BUFFER, 0);
+//        glBindVertexArray(0);
+//
+//        if (verticesBuffer != null) {
+//            MemoryUtil.memFree(verticesBuffer);
+//        }
+//    }
+
+    /**
+     * Renders one untextured quad.
+     *
+     * Parameters are for the size of the quad and the position, starting from the
+     * upper left corner.
+     */
+    public static void renderQuad(String texPath, int vaoID) {
+        shaderProgram.bind();
+
+        glBindVertexArray(vaoID);
+        glEnableVertexAttribArray(0);
+
+        glDrawArrays(GL_QUADS, 0, 4);//Make sure these are what we need
+
+        glDisableVertexAttribArray(0);
+        glBindVertexArray(0);
+
+        shaderProgram.unbind();
+
+//        glTexCoord2f(0, 0);
+//        glVertex2f(a[0], a[1]);
+//        glTexCoord2f(1, 0);
+//        glVertex2f(b[0], b[1]);
+//        glTexCoord2f(1, 1);
+//        glVertex2f(c[0], c[1]);
+//        glTexCoord2f(0, 1);
+//        glVertex2f(d[0], d[1]);
     }
 
     /**

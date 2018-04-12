@@ -4,6 +4,7 @@ import engine.objects.Box;
 
 import java.util.ArrayList;
 
+import static engine.core.Renderer.getQuadVertexArray;
 import static engine.core.Renderer.renderQuad;
 import static engine.filesystem.loadfiles.LoadFile.loadBoxesFromMapFile;
 import static engine.filesystem.loadfiles.LoadFile.loadMapFile;
@@ -25,6 +26,10 @@ public class Map {
         System.out.println("Got map: " + path);
         loadMapFile(path);
         boxes = loadBoxesFromMapFile(path);
+        for (int a = boxes.size(); a > 0; a--) {
+            Box b = boxes.get(a-1);
+            b.initBox();
+        }
     }
 
     public static void setSpawnPoint(int[] sp) {
@@ -42,11 +47,10 @@ public class Map {
         try {
             for (int a = boxes.size(); a > 0; a--) {
                 Box b = boxes.get(a-1);
-                float[] i = b.getCoordinates();
-                renderQuad(0.2f, 0.2f, i[0], i[1], b.getTexturePath());
+                b.renderBox();
             }
         } catch (Exception e) {
-            renderQuad(1, 1, 1, 1, null);
+//            renderQuad(getQuadVertexArray(1, 1, 1, 1), null);
         }
     }
 }

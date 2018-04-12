@@ -9,6 +9,23 @@ import java.io.*;
 
 public class LoadFile {
 
+    //TODO: Use arraylist instead of plain array, as it must be resized
+
+    public static String[] loadFile(String filePath) {
+        String[] out = null;
+        try {
+            Scanner inFile = new Scanner(new FileInputStream(filePath));
+
+            while(inFile.hasNextLine()) {
+                out.add(inFile.nextLine());
+            }
+            inFile.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Map not found.");
+        }
+        return out;
+    }
+
     /**
      * Loads basic and general map data from a file. Only known constants are loaded
      * here, everything else has to be loaded on an individual basis.
