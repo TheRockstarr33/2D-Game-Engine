@@ -1,13 +1,10 @@
 package engine.objects;
 
-import engine.filesystem.loadfiles.Texture;
-import org.lwjgl.stb.*;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
 
 import static engine.core.Renderer.getQuadVertexArray;
-import static engine.core.Renderer.renderQuad;
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
 import static org.lwjgl.opengl.GL15.glBindBuffer;
@@ -54,7 +51,7 @@ public class Box {
      */
     public void renderBox() {
         float[] i = getCoordinates();
-        renderQuad(getTexturePath(), vaoId);
+//        renderQuad(getTexturePath(), vaoId);
     }
 
     public void initBox() {

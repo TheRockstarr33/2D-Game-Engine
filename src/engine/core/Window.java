@@ -8,6 +8,7 @@ import engine.filesystem.loadfiles.LoadConfig;
 import engine.input.KeyboardHandler;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 
 public class Window {
 
@@ -43,13 +44,16 @@ public class Window {
         glfwMakeContextCurrent(win);
         GL.createCapabilities();
 
-        try {
-            Renderer.initRenderer();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Renderer.initRenderer();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        GL11.glViewport(0, 0, windowWidth, windowHeight);
 
         while (glfwWindowShouldClose(win) != true) {
+
 
             glfwPollEvents();
 
@@ -60,6 +64,7 @@ public class Window {
 
                 glfwPollEvents();
 
+                glClearColor(0.0f, 0.0f, 0.0f, 1.0f); //Needed?
                 glClear(GL_COLOR_BUFFER_BIT);
 
                 //This code is deprecated, must be changed later. it is being used now just for testing purposes.

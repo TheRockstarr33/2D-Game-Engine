@@ -38,6 +38,8 @@ public class ShaderProgram {
 
         glAttachShader(programId, shaderId);
 
+        glBindAttribLocation(shaderId, 0, "position");
+
         return shaderId;
     }
 

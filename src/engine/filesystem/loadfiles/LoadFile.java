@@ -2,28 +2,30 @@ package engine.filesystem.loadfiles;
 
 import engine.filesystem.Map;
 import engine.objects.Box;
+import org.apache.commons.io.FileUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.io.*;
 
 public class LoadFile {
 
-    //TODO: Use arraylist instead of plain array, as it must be resized
-
-    public static String[] loadFile(String filePath) {
-        String[] out = null;
+    /**
+     * Loads a file as a string, without parsing.
+     *
+     * @param filePath
+     * @return
+     */
+    public static String loadFile(String filePath) {
+        File file = new File(filePath);
+        String fileData = null;
         try {
-            Scanner inFile = new Scanner(new FileInputStream(filePath));
-
-            while(inFile.hasNextLine()) {
-                out.add(inFile.nextLine());
-            }
-            inFile.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Map not found.");
+            fileData = FileUtils.readFileToString(file, "UTF-8");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return out;
+        return fileData;
     }
 
     /**
