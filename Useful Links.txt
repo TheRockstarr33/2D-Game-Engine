@@ -2,3 +2,5 @@ http://wiki.lwjgl.org/wiki/The_Quad_textured.html
 http://ninjacave.com/lwjglbasics3
 https://lwjglgamedev.gitbooks.io/3d-game-development-with-lwjgl/content/chapter04/chapter4.html
 https://www.youtube.com/watch?v=6-9XFm7XAT8
+https://learnopengl.com/Getting-started/Textures
+https://github.com/mattdesl/lwjgl-basics/wiki/textures
