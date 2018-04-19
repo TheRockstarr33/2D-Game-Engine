@@ -10,7 +10,7 @@ public class Box {
     //This stores the idNumber of each box, in addition to the rendering data for
     //each. It is just used for rendering, and for individual coordinates each box
     //must be accessed individually.
-    private static Map<Integer, float[]> boxCoords; //Does the array work???
+    private static Map<Integer, float[]> boxCoords = new HashMap<>();
     float x;
     float y;
     int texId;
@@ -21,28 +21,23 @@ public class Box {
         this.y=y;
         this.texId=texid;
 
-        boxCoords = new HashMap<>();
         idNumber = boxCoords.size()+1;
-
-//        float[] a = {x, y};
-        boxCoords.put(boxCoords.size()+1, Renderer.getQuadVertexArray(1,
-                1, x, y));
-//        a = null;
+        boxCoords.put(idNumber, Renderer.getQuadVertexArray(1,1, x, y));
         //We can add more variables here if we need to, like size or how it looks
     }
 
+    /**
+     * Renders all of the required information every frame
+     */
     public static void renderBoxes() {
-        if(boxCoords != null) {
-            int a = 0;
-            try {
-                a = boxCoords.size();
-            } catch (Exception e) {
-//            System.out.println("");
-            }
-            while (a > 0) {
-                Renderer.drawQuad(boxCoords.get(a));
-                a--;
-            }
+        int a = 0;
+        try {
+            a = boxCoords.size();
+        } catch (Exception e) {
+        }
+        while (a > 0) {
+            Renderer.drawQuad(boxCoords.get(a));
+            a--;
         }
     }
 

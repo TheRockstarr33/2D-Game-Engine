@@ -21,6 +21,13 @@ public class Map {
      * @param path
      */
     public static void loadMap(String path) {
+        if(boxes!=null) {
+            for(int a = boxes.size(); a > 0; a--) {
+                Box b = boxes.get(a);
+                b.deleteBox();
+            }
+        }
+
         System.out.println("Got map: " + path);
         loadMapFile(path);
         boxes = loadBoxesFromMapFile(path);
