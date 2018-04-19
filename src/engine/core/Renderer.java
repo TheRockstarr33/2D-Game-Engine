@@ -58,11 +58,9 @@ public class Renderer {
 
     /**
      * Sends all rendering info to the window.
-     * TODO: Remove this code, replace with more efficient system
+     * TODO: Add object manager to handle the rendering of different objects
      */
     public static void getRenderInfo() {
-        //THIS IS JUST FOR TESTING. Needs to be modified to send info from objects.
-//        render();
         Box.renderBoxes();
     }
 }

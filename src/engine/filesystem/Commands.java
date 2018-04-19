@@ -24,6 +24,7 @@ public class Commands {
                 try {
                     loadMap(o.replaceAll("map ", ""));
                 } catch (Exception e) {
+                    System.out.println(e);
                     System.out.println("No such map.");
                 }
             } else if (o == "exit") {

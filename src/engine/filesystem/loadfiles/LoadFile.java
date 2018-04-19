@@ -12,23 +12,6 @@ import java.io.*;
 public class LoadFile {
 
     /**
-     * Loads a file as a string, without parsing.
-     *
-     * @param filePath
-     * @return
-     */
-    public static String loadFile(String filePath) {
-        File file = new File(filePath);
-        String fileData = null;
-        try {
-            fileData = FileUtils.readFileToString(file, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return fileData;
-    }
-
-    /**
      * Loads basic and general map data from a file. Only known constants are loaded
      * here, everything else has to be loaded on an individual basis.
      *
@@ -67,15 +50,17 @@ public class LoadFile {
             while(inFile.hasNextLine()) {
                 String q = inFile.nextLine();
                 if(q.startsWith("box")) {
-                    Box a = new Box(Float.parseFloat(inFile.nextLine()),
-                            Float.parseFloat(inFile.nextLine()),
-                            Integer.parseInt(inFile.nextLine()));
+                    float v1 = Float.parseFloat(inFile.nextLine());
+                    float v2 = Float.parseFloat(inFile.nextLine());
+                    int v3 = Integer.parseInt(inFile.nextLine());
+
+                    Box a = new Box(v1, v2, v3);
+
                     output.add(a);
                 }
             }
             inFile.close();
         } catch (FileNotFoundException e) {
-//            e.printStackTrace();
             System.out.println("Map " + filePath + " not found");
         }
         return output;

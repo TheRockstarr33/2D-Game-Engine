@@ -2,6 +2,7 @@ package engine.objects;
 
 import engine.core.Renderer;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Box {
@@ -20,6 +21,7 @@ public class Box {
         this.y=y;
         this.texId=texid;
 
+        boxCoords = new HashMap<>();
         idNumber = boxCoords.size()+1;
 
 //        float[] a = {x, y};
@@ -30,15 +32,17 @@ public class Box {
     }
 
     public static void renderBoxes() {
-        int a = 0;
-        try {
-            a = boxCoords.size();
-        } catch (Exception e) {
+        if(boxCoords != null) {
+            int a = 0;
+            try {
+                a = boxCoords.size();
+            } catch (Exception e) {
 //            System.out.println("");
-        }
-        while(a>0) {
-            Renderer.drawQuad(boxCoords.get(a));
-            a--;
+            }
+            while (a > 0) {
+                Renderer.drawQuad(boxCoords.get(a));
+                a--;
+            }
         }
     }
 
