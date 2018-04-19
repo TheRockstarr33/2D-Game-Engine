@@ -4,8 +4,6 @@ import engine.objects.Box;
 
 import java.util.ArrayList;
 
-import static engine.core.Renderer.getQuadVertexArray;
-import static engine.core.Renderer.renderQuad;
 import static engine.filesystem.loadfiles.LoadFile.loadBoxesFromMapFile;
 import static engine.filesystem.loadfiles.LoadFile.loadMapFile;
 
@@ -28,7 +26,7 @@ public class Map {
         boxes = loadBoxesFromMapFile(path);
         for (int a = boxes.size(); a > 0; a--) {
             Box b = boxes.get(a-1);
-            b.initBox();
+//            b.initBox();
         }
     }
 
@@ -47,7 +45,7 @@ public class Map {
         try {
             for (int a = boxes.size(); a > 0; a--) {
                 Box b = boxes.get(a-1);
-                b.renderBox();
+//                b.renderBox();
             }
         } catch (Exception e) {
 //            renderQuad(getQuadVertexArray(1, 1, 1, 1), null);

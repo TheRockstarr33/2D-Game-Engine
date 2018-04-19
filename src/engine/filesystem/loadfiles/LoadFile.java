@@ -75,7 +75,8 @@ public class LoadFile {
             }
             inFile.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Map " + filePath + " not found");
         }
         return output;
     }

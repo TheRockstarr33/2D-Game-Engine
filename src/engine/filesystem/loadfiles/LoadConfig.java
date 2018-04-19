@@ -33,7 +33,7 @@ public class LoadConfig {
             }
             inFile.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Map not found.");
+            System.out.println("Config not found.");
         }
     }
 
