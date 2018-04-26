@@ -46,9 +46,13 @@ public class Renderer {
     public static void drawQuad(float[] a) {
         try {
             glBegin(GL_QUADS);
+            glTexCoord2f(0.0f, 0.0f);
             glVertex2f(a[0], a[1]);
+            glTexCoord2f(1.0f, 0.0f);
             glVertex2f(a[2], a[3]);
+            glTexCoord2f(1.0f, 1.0f);
             glVertex2f(a[4], a[5]);
+            glTexCoord2f(0.0f, 1.0f);
             glVertex2f(a[6], a[7]);
             glEnd();
         } catch (Exception e) {

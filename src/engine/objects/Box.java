@@ -1,9 +1,12 @@
 package engine.objects;
 
 import engine.core.Renderer;
+import engine.filesystem.loadfiles.Texture;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class Box {
 
@@ -35,10 +38,18 @@ public class Box {
             a = boxCoords.size();
         } catch (Exception e) {
         }
+
+        int texID = Texture.loadTexture("/home/davidr/2D Game Engine/2D-Game-Engine/textures/qBlock.png", 1890, 1890);
+        glEnable(GL_TEXTURE_2D);
+
+        ///home/davidr/2D Game Engine/2D-Game-Engine/textures
+
         while (a > 0) {
             Renderer.drawQuad(boxCoords.get(a));
             a--;
         }
+        glDisable(GL_TEXTURE_2D);
+        glDeleteTextures(texID);
     }
 
     /**
