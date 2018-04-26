@@ -4,3 +4,5 @@ https://lwjglgamedev.gitbooks.io/3d-game-development-with-lwjgl/content/chapter0
 https://www.youtube.com/watch?v=6-9XFm7XAT8
 https://learnopengl.com/Getting-started/Textures
 https://github.com/mattdesl/lwjgl-basics/wiki/textures
+https://github.com/LWJGL/lwjgl3/blob/master/modules/samples/src/test/java/org/lwjgl/demo/stb/Image.java
+http://www.java-gaming.org/index.php?topic=25856.0
