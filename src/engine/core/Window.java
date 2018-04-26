@@ -1,10 +1,11 @@
 package engine.core;
 
-import static engine.filesystem.Commands.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 
 import engine.filesystem.loadfiles.LoadConfig;
+import engine.gamestates.State;
+import engine.input.Input;
 import engine.input.KeyboardHandler;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL;
@@ -17,6 +18,8 @@ public class Window {
     int windowWidth = 640;
     int windowHeight = 480;
     String windowTitle = "Game Engine";
+
+    protected static State state = State.MAIN_MENU;
 
     public Window() {
 
@@ -47,14 +50,13 @@ public class Window {
         GL11.glViewport(0, 0, windowWidth, windowHeight);
 
         while (glfwWindowShouldClose(win) != true) {
+            if(state==State.GAME) {
+                glfwPollEvents();
 
-
-            glfwPollEvents();
-
-            glfwSetKeyCallback(win, keyCallback = new KeyboardHandler());
+                glfwSetKeyCallback(win, keyCallback = new KeyboardHandler());
 
                 //ALL INPUT CODE GOES HERE
-                update();
+                Input.getInput();
 
                 glfwPollEvents();
 
@@ -66,18 +68,30 @@ public class Window {
                 glEnd();
 
                 glfwSwapBuffers(win);
+            } else if(state==State.MAIN_MENU) {
+                glfwPollEvents();
+
+                glfwSetKeyCallback(win, keyCallback = new KeyboardHandler());
+
+                //ALL INPUT CODE GOES HERE
+                Input.getInput();
+
+                glfwPollEvents();
+
+                glClearColor(0.0f, 0.0f, 0.0f, 1.0f); //Needed?
+                glClear(GL_COLOR_BUFFER_BIT);
+
+                //This is where our rendering info goes
+//                Renderer.getRenderInfo();
+                Renderer.drawQuad(Renderer.getQuadVertexArray(1, 1, 1, 1));
+
+                glEnd();
+
+                glfwSwapBuffers(win);
+            }
         }
 
         if(glfwWindowShouldClose(win) == true) {
-            glfwTerminate();
-        }
-    }
-
-    public void update() {
-        if(KeyboardHandler.isKeyDown(GLFW_KEY_P)) {
-            getInput();
-        }
-        if(KeyboardHandler.isKeyDown(GLFW_KEY_Q)) {
             glfwTerminate();
         }
     }
